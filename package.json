@@ -33,6 +33,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
     "plop": "^2.7.4",
+    "postcss-px-to-viewport": "^1.1.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
