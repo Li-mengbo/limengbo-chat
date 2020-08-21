@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const progressbarWebpack = require('progress-bar-webpack-plugin'); // 打包进度条
+const ProgressbarWebpack = require('progress-bar-webpack-plugin'); // 打包进度条
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const chalk = require('chalk'); // 打包进度条
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -40,20 +41,45 @@ module.exports = {
     }
   },
   // 通过操作对象修改webpack配置
-  configureWebpack: {
-    resolve: {
-      alias: {
-        '@': resolve('src'),
-      },
-    },
-    plugins: [
+  configureWebpack: (config) => {
+    const plugins = [];
+    config.resolve.alias = {
+      '@': resolve('src'),
+    };
+    if (IS_PROD) {
       // 打包显示进度条
-      // eslint-disable-next-line new-cap
-      new progressbarWebpack({
-        format: ` build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
-        clear: false,
-      }),
-    ],
+      plugins.push(
+        new ProgressbarWebpack({
+          format: ` build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
+          clear: false,
+        }),
+      );
+      // 分开打包文件
+      config.optimization.splitChunks = {
+        cacheGroups: {
+          commons: {
+            name: 'chunk-commons',
+            chunks: 'initial',
+            minChunks: 2,
+            maxInitialRequests: 5,
+            minSize: 0,
+            priority: 1,
+            reuseExistingChunk: true,
+            enforce: true,
+          },
+          vendors: {
+            name: 'chunk-vendors',
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'initial',
+            priority: 2,
+            reuseExistingChunk: true,
+            enforce: true,
+          },
+        },
+
+      };
+    }
+    config.plugins = [...config.plugins, ...plugins];
   },
   /**
      * 配置本地服务，于webpack.devServer配置项一致
