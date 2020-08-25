@@ -1,7 +1,10 @@
+{{#if template}}
 <template>
     <div class="{{name}}-page"></div>
 </template>
+{{/if}}
 
+{{#if script}}
 <script>
     export default {
         name: '{{ properCase name }}',
@@ -14,7 +17,10 @@
         methods: {}
     }
 </script>
+{{#if script}}
 
+{{#if style}}
 <style lang="scss" scoped>
 
 </style>
+{{#if style}}
