@@ -41,6 +41,12 @@ module.exports = {
   actions: (data) => {
     const name = '{{name}}';
     const { blocks } = data;
+    const options = ['state', 'mutations'];
+    const path = `,
+  `;
+    if (blocks.length === 3) {
+      options.push('actions');
+    }
     const actions = [
       {
         type: 'add', // 类型创建模板文件
@@ -48,6 +54,7 @@ module.exports = {
         templateFile: 'plop-templates/store/index.hbs', // 文件模板
         data: {
           name, // 参数名
+          options: options.join(path),
           state: blocks.includes('state'),
           mutations: blocks.includes('mutations'),
           actions: blocks.includes('actions'),
