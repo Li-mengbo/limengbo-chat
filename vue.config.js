@@ -85,6 +85,8 @@ module.exports = {
      * 配置本地服务，于webpack.devServer配置项一致
      */
   devServer: {
+    // eslint-disable-next-line global-require
+    before: require('./mock'),
     port: '8888',
     open: true,
     progress: true,

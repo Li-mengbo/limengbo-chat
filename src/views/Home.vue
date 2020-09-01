@@ -8,11 +8,17 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue';
+import getIndexData from '@/api/index';
 
 export default {
   name: 'Home',
   components: {
     HelloWorld,
+  },
+  created() {
+    getIndexData({
+      channelCode: 'TENCENT',
+    });
   },
 };
 </script>
