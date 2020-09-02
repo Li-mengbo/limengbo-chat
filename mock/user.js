@@ -12,9 +12,9 @@ module.exports = [
           avatar: "@image('200x200','red','#fff','avatar')", // 生成图片
           description: '@paragraph()', // 描述
           ip: '@ip()', // IP地址
-          email: '@email()', // email
+          email: '@email()' // email
         }],
-        message: 'SUCCESS',
+        message: 'SUCCESS'
       };
     },
   },

@@ -36,7 +36,7 @@ module.exports = {
       config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
         {
           analyzerMode: 'static',
-        },
+        }
       ]);
     }
   },
@@ -44,7 +44,7 @@ module.exports = {
   configureWebpack: (config) => {
     const plugins = [];
     config.resolve.alias = {
-      '@': resolve('src'),
+      '@': resolve('src')
     };
     if (IS_PROD) {
       // 打包显示进度条
@@ -52,7 +52,7 @@ module.exports = {
         new ProgressbarWebpack({
           format: ` build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
           clear: false,
-        }),
+        })
       );
       // 分开打包文件
       config.optimization.splitChunks = {
@@ -69,13 +69,21 @@ module.exports = {
           },
           vendors: {
             name: 'chunk-vendors',
-            test: /[\\/]node_modules[\\/]/,
+            test: /[\\/]node_modules[\\/]iview[\\/]/,
             chunks: 'initial',
             priority: 2,
             reuseExistingChunk: true,
             enforce: true,
           },
-        },
+          iview: {
+            name: 'chunk-iview',
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'all',
+            priority: 2,
+            reuseExistingChunk: true,
+            enforce: true,
+          }
+        }
 
       };
     }
@@ -93,7 +101,7 @@ module.exports = {
     // 配置eslint警告
     overlay: {
       warnings: true,
-      errors: false,
-    },
-  },
+      errors: false
+    }
+  }
 };
