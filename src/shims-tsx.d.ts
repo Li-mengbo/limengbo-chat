@@ -1,4 +1,6 @@
-import Vue, { VNode } from 'vue';
+// 允许.tsx结尾的文件
+/**
+import Vue, { VNode } from 'vue'
 
 declare global {
   namespace JSX {
@@ -11,3 +13,4 @@ declare global {
     }
   }
 }
+*/

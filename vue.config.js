@@ -1,17 +1,17 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require('path');
+const path = require('path')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const ProgressbarWebpack = require('progress-bar-webpack-plugin'); // 打包进度条
+const ProgressbarWebpack = require('progress-bar-webpack-plugin') // 打包进度条
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const chalk = require('chalk'); // 打包进度条
+const chalk = require('chalk') // 打包进度条
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV); // 是否是正式环境
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV) // 是否是正式环境
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // 打包分析
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer') // 打包分析
 
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 module.exports = {
   /**
@@ -30,30 +30,30 @@ module.exports = {
   // 通过链式编程修改webpack配置
   chainWebpack: (config) => {
     // 是否将符号链接(symlink)解析到它们的符号链接位置
-    config.resolve.symlinks(true);
+    config.resolve.symlinks(true)
     // 打包解析
     if (IS_PROD) {
       config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
         {
-          analyzerMode: 'static',
+          analyzerMode: 'static'
         }
-      ]);
+      ])
     }
   },
   // 通过操作对象修改webpack配置
   configureWebpack: (config) => {
-    const plugins = [];
+    const plugins = []
     config.resolve.alias = {
       '@': resolve('src')
-    };
+    }
     if (IS_PROD) {
       // 打包显示进度条
       plugins.push(
         new ProgressbarWebpack({
           format: ` build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
-          clear: false,
+          clear: false
         })
-      );
+      )
       // 分开打包文件
       config.optimization.splitChunks = {
         cacheGroups: {
@@ -65,7 +65,7 @@ module.exports = {
             minSize: 0,
             priority: 1,
             reuseExistingChunk: true,
-            enforce: true,
+            enforce: true
           },
           vendors: {
             name: 'chunk-vendors',
@@ -73,7 +73,7 @@ module.exports = {
             chunks: 'initial',
             priority: 2,
             reuseExistingChunk: true,
-            enforce: true,
+            enforce: true
           },
           iview: {
             name: 'chunk-iview',
@@ -81,13 +81,13 @@ module.exports = {
             chunks: 'all',
             priority: 2,
             reuseExistingChunk: true,
-            enforce: true,
+            enforce: true
           }
         }
 
-      };
+      }
     }
-    config.plugins = [...config.plugins, ...plugins];
+    config.plugins = [...config.plugins, ...plugins]
   },
   /**
      * 配置本地服务，于webpack.devServer配置项一致
@@ -104,4 +104,4 @@ module.exports = {
       errors: false
     }
   }
-};
+}

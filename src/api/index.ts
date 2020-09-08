@@ -1,6 +1,10 @@
 import request from '@/utils/request'
 
-const getIndexData = <T extends Record<string, number>>(params: T) => request({
+interface SearchFunc {
+  channelCode: string;
+}
+
+const getIndexData = (params: SearchFunc) => request({
   url: '/user/userInfo',
   method: 'get',
   params

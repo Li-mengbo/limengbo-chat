@@ -1,5 +1,6 @@
+// 用于ts识别.vue文件
 declare module '*.vue' {
-  import Vue from 'vue';
+  import Vue from 'vue'
 
-  export default Vue;
+  export default Vue
 }

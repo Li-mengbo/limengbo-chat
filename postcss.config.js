@@ -8,7 +8,7 @@ module.exports = {
       selectorBlackList: [], // 不进行转换的css类名
       minPixelValue: 1,
       mediaQuery: false,
-      exclude: /(\/|\\)(node_modules)(\/|\\)/,
-    },
-  },
-};
+      exclude: /(\/|\\)(node_modules)(\/|\\)/
+    }
+  }
+}
