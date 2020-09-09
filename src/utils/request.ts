@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'iview'
+import { Notify } from 'vant'
 
 // eslint-disable-next-line
 const service: any = axios.create({
@@ -26,6 +27,8 @@ service.interceptors.response.use(
       (Message as any).error(res.message)
       return Promise.reject(new Error(res.message || 'Error'))
     }
+    // eslint-disable-next-line
+    (Notify as any)({ type: 'success', message: '通知内容' })
     return roesponse
   },
   (error: {message: string}) => {

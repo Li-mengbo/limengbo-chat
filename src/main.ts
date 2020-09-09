@@ -1,11 +1,11 @@
-import { Button } from 'iview'
-import 'iview/dist/styles/iview.css'
+import { Button } from 'vant'
+import 'vant/lib/index.css'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.component('Button', Button)
+Vue.use(Button)
 Vue.config.productionTip = false
 
 new Vue({

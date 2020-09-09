@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <Button type="primary">Primary</Button>
+    <van-button type="primary">主要按钮</van-button>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
@@ -18,7 +18,6 @@ import getIndexData from '@/api/index'
     HelloWorld
   }
 })
-
 export default class extends Vue {
   private created(): void {
     getIndexData({

@@ -1,24 +1,20 @@
-{{#if template}}
 <template>
-    <div class="{{name}}-page"></div>
+    <div class="login-page">登录</div>
 </template>
-{{/if}}
 
-{{#if script}}
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
-    name: '{{ properCase name }}'
+  name: 'Login'
 })
 
 export default class extends Vue {
 }
 </script>
-{{/if}}
 
-{{#if style}}
 <style lang="scss" scoped>
-
+.login-page {
+  font-size: 14px;
+}
 </style>
-{{/if}}
